@@ -272,11 +272,15 @@ MISSION
 =========================== */
 
 .mission {
-
+    margin-top: 10px;
     padding: 120px 0;
-
+    background: linear-gradient(rgba(0, 0, 0, 0.65),
+            rgba(0, 0, 0, 0.65)),
+        url("images/mission-bg.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     text-align: center;
-
 }
 
 .mission h2 {
@@ -287,7 +291,7 @@ MISSION
 
     font-family: 'Playfair Display';
 
-    color: #08224A;
+    color: #fff;
 
 }
 
@@ -297,7 +301,7 @@ MISSION
 
     margin: auto;
 
-    background: #fff;
+    background: #fff9f9;
 
     padding: 60px;
 
@@ -392,10 +396,13 @@ ABOUT
 VISION
 =========================== */
 .vision {
-
     padding: 120px 0;
-    background: #f8fafc;
-
+    background: linear-gradient(rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.6)),
+        url("images/vision-bg.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .vision-wrapper {
@@ -422,6 +429,7 @@ VISION
     font-weight: 700;
     letter-spacing: 2px;
     margin-bottom: 15px;
+    font-size: 30px;
 
 }
 
@@ -429,7 +437,7 @@ VISION
 
     font-size: 46px;
     line-height: 1.2;
-    color: #08224A;
+    color: #fff;
     margin-bottom: 25px;
     font-family: 'Playfair Display', serif;
 
@@ -437,7 +445,7 @@ VISION
 
 .vision-text {
 
-    color: #64748b;
+    color: #f1f5f9;
     margin-bottom: 40px;
     font-size: 17px;
     line-height: 1.9;
@@ -483,7 +491,7 @@ VISION
 
 .vision-item h4 {
 
-    color: #08224A;
+    color: #fff;
     margin-bottom: 6px;
     font-size: 20px;
 
@@ -491,7 +499,7 @@ VISION
 
 .vision-item p {
 
-    color: #64748b;
+    color: #f1f5f9;
 
 }
 
@@ -715,13 +723,28 @@ VISION
 /* ===========================
 DONATE
 =========================== */
-
 .donate {
-
+    position: relative;
     padding: 120px 0;
+    background: #f8fafc;
+    overflow: hidden;
+}
 
-    background: #f7f7f7;
+.donate::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    /* Change to left: 0 if you want it on the left */
+    width: 45%;
+    height: 100%;
+    background: url("images/donate-bg.jpeg") center center/cover no-repeat;
+    border-radius: 80px 0 0 80px;
+}
 
+.donate .container {
+    position: relative;
+    z-index: 2;
 }
 
 .donate-card {
@@ -1107,91 +1130,52 @@ header.sticky .btn-nav {
 /*===========================
     GALLERY
 ============================*/
-
-.gallery{
-
-    padding:120px 0;
-    background:#f8fafc;
-
+.gallery {
+    padding: 120px 0;
+    background: #eaeaea;
 }
 
-.gallery .container{
+.gallery .section-tag,
+.gallery h2 {
     text-align: center;
+    display: block;
 }
 
-.gallery h2{
-
-    text-align:center;
-    margin:20px 0 70px;
-
-    font-size:46px;
-
-    color:#08224A;
-
-    font-family:'Playfair Display',serif;
-
+.gallery h2 {
+    margin: 15px 0 60px;
 }
 
-.gallerySwiper{
-
-    width:100%;
-    padding:40px 0 70px;
-
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 250px;
+    gap: 20px;
 }
 
-.gallerySwiper .swiper-slide{
-
-    width:360px;
-    height:500px;
-
-    transition:.45s;
-
+.gallery-item {
+    overflow: hidden;
+    border-radius: 18px;
+    cursor: pointer;
+    position: relative;
 }
 
-.gallerySwiper .swiper-slide img{
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    border-radius:25px;
-
-    box-shadow:0 30px 60px rgba(0,0,0,.18);
-
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s ease;
 }
 
-/* Center image */
-
-.gallerySwiper .swiper-slide-active{
-
-    transform:scale(1.12);
-
+.gallery-item:hover img {
+    transform: scale(1.08);
 }
 
-/* Side images */
-
-.gallerySwiper .swiper-slide-prev,
-.gallerySwiper .swiper-slide-next{
-
-    transform:scale(.88);
-
+.gallery-item.tall {
+    grid-row: span 2;
 }
 
-/* Outer images */
-
-.gallerySwiper .swiper-slide:not(.swiper-slide-active):not(.swiper-slide-prev):not(.swiper-slide-next){
-
-    transform:scale(.72);
-    opacity:.6;
-
-}
-
-.swiper-button-next,
-.swiper-button-prev{
-
-    color:#D4AF37;
-
+.gallery-item.wide {
+    grid-column: span 2;
 }
 
 
@@ -1348,6 +1332,21 @@ header.sticky .btn-nav {
         width: 95%;
     }
 
+    .section-tag {
+        font-size: 20px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 220px;
+    }
+
+    .gallery-item.tall,
+    .gallery-item.wide {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
 }
 
 @media (max-width:768px) {
@@ -1432,7 +1431,7 @@ header.sticky .btn-nav {
     }
 
 
-      .vision-image{
+    .vision-image {
         height: auto;
         position: relative;
     }
@@ -1474,7 +1473,7 @@ header.sticky .btn-nav {
     .burden {
         padding: 80px 0;
     }
-    
+
     .burden-image {
         order: 2;
     }
@@ -1494,6 +1493,12 @@ header.sticky .btn-nav {
     .prayer {
         padding: 80px 0;
     }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 280px;
+    }
+
 
 }
 
