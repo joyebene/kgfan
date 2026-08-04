@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <link rel="stylesheet" href="style.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
 </head>
 
 <body>
@@ -173,7 +175,7 @@
                     <div class="stat-icon">
                         <i class="fas fa-heart"></i>
                     </div>
-                    <h2 class="counter" data-target="2500">0</h2>
+                    <h2 class="counter" data-target="1300">0</h2>
                     <span>People Healed</span>
                 </div>
 
@@ -181,7 +183,7 @@
                     <div class="stat-icon">
                         <i class="fas fa-church"></i>
                     </div>
-                    <h2 class="counter" data-target="5">0</h2>
+                    <h2 class="counter" data-target="8">0</h2>
                     <span>Crusades</span>
                 </div>
 
@@ -682,7 +684,9 @@
 
                 </div>
 
-                <input type="number" placeholder="Enter Custom Amount">
+                <input type="email" id="donorEmail" placeholder="Enter your email address" required>
+
+                <input type="number" id="donationAmount" placeholder="Enter Custom Amount">
 
                 <button class="donate-btn">
 
@@ -797,6 +801,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://js.paystack.co/v2/inline.js"></script>
     <script src="script.js"></script>
 
 

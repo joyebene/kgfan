@@ -134,20 +134,66 @@ window.addEventListener("scroll", () => {
 ========================================== */
 
 const donateButton = document.querySelector(".donate-btn");
+const amountInput = document.getElementById("donationAmount");
 
 donateButton.addEventListener("click", () => {
 
-    let amount = document.querySelector("input").value;
+    const amount = Number(amountInput.value);
 
-    if (amount == "") {
-
-        alert("Please enter donation amount.");
-
+    if (!amount || amount < 100) {
+        alert("Please enter a valid donation amount.");
         return;
-
     }
 
-    alert("Paystack Integration Goes Here.");
+    const email = document.getElementById("donorEmail").value.trim();
+
+    if (!email) {
+        alert("Email is required.");
+        return;
+    }
+
+    const paystack = new PaystackPop();
+
+    paystack.newTransaction({
+
+        key: "pk_live_1cf174fc3d54f04c32f3da68d5b295c1f2545457",
+
+        email: email,
+
+        amount: amount * 100,
+
+        currency: "NGN",
+
+        reference: "KGFAN_" + Date.now(),
+
+        metadata: {
+
+            brand: "Kingdom Gospel For All Nations",
+
+            donation_type: "General Donation",
+
+            source: "Website"
+
+        },
+
+        onSuccess(transaction) {
+
+            alert(
+                "Thank you for your donation!\nReference: " +
+                transaction.reference
+            );
+
+            // Later we'll verify the payment on your backend
+
+        },
+
+        onCancel() {
+
+            alert("Donation cancelled.");
+
+        }
+
+    });
 
 });
 
