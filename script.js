@@ -272,3 +272,62 @@ const gallery = new Swiper(".gallerySwiper", {
     }
 
 });
+
+
+/* ==========================================
+   HERO COUNTERS
+========================================== */
+
+const heroCounters = document.querySelectorAll(".counter");
+
+const counterObserver = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (!entry.isIntersecting) return;
+
+        const counter = entry.target;
+        const target = parseInt(counter.dataset.target);
+
+        let current = 0;
+
+        const increment = Math.max(1, target / 150);
+
+        function updateCounter() {
+
+            current += increment;
+
+            if (current < target) {
+
+                counter.textContent = Math.floor(current).toLocaleString();
+
+                requestAnimationFrame(updateCounter);
+
+            } else {
+
+                if (target >= 1000) {
+
+                    counter.textContent =
+                        (target / 1000).toLocaleString() + "K+";
+
+                } else {
+
+                    counter.textContent = target + "+";
+
+                }
+
+            }
+
+        }
+
+        updateCounter();
+
+        counterObserver.unobserve(counter);
+
+    });
+
+}, {
+    threshold: 0.4
+});
+
+heroCounters.forEach(counter => counterObserver.observe(counter));
