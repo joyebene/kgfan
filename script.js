@@ -19,38 +19,6 @@ window.addEventListener("scroll", () => {
 });
 
 
-/* ==========================================
-   SMOOTH ACTIVE DONATION BUTTON
-========================================== */
-
-const amountButtons = document.querySelectorAll(".amounts button");
-
-let selectedAmount = 5000;
-
-amountButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        amountButtons.forEach(btn => btn.classList.remove("active"));
-
-        button.classList.add("active");
-
-        selectedAmount = Number(
-
-            button.innerText
-
-                .replace("₦", "")
-
-                .replace(",", "")
-
-        );
-
-        document.querySelector("input").value = selectedAmount;
-
-    })
-
-});
-
 
 /* ==========================================
    SCROLL REVEAL
