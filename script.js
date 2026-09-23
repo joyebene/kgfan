@@ -96,16 +96,84 @@ window.addEventListener("scroll", () => {
 });
 
 
-
+// key: "pk_live_1cf174fc3d54f04c32f3da68d5b295c1f2545457",
 /* ==========================================
    PAYSTACK PLACEHOLDER
+========================================== */
+
+// const donateButton = document.querySelector(".donate-btn");
+// const amountInput = document.getElementById("donationAmount");
+
+// donateButton.addEventListener("click", () => {
+
+//     const amount = Number(amountInput.value);
+
+//     if (!amount || amount < 100) {
+//         alert("Please enter a valid donation amount.");
+//         return;
+//     }
+
+//     const email = document.getElementById("donorEmail").value.trim();
+
+//     if (!email) {
+//         alert("Email is required.");
+//         return;
+//     }
+
+//     const paystack = new PaystackPop();
+
+//     paystack.newTransaction({
+
+        
+//         key: "",
+//         email: email,
+
+//         amount: amount * 100,
+
+//         currency: "NGN",
+
+//         reference: "KGFAN_" + Date.now(),
+
+//         metadata: {
+
+//             brand: "Kingdom Gospel For All Nations",
+
+//             donation_type: "General Donation",
+
+//             source: "Website"
+
+//         },
+
+//         onSuccess(transaction) {
+
+//             alert(
+//                 "Thank you for your donation!\nReference: " +
+//                 transaction.reference
+//             );
+
+//             // Later we'll verify the payment on your backend
+
+//         },
+
+//         onCancel() {
+
+//             alert("Donation cancelled.");
+
+//         }
+
+//     });
+
+// });
+
+
+/* ==========================================
+   FLUTTERWAVE PLACEHOLDER
 ========================================== */
 
 const donateButton = document.querySelector(".donate-btn");
 const amountInput = document.getElementById("donationAmount");
 
 donateButton.addEventListener("click", () => {
-
     const amount = Number(amountInput.value);
 
     if (!amount || amount < 100) {
@@ -120,49 +188,52 @@ donateButton.addEventListener("click", () => {
         return;
     }
 
-    const paystack = new PaystackPop();
+    FlutterwaveCheckout({
+        public_key: "FLWPUBK-5eed267042fd4cdb04a3ffc7c4f6f3e0-X",
 
-    paystack.newTransaction({
+        tx_ref: "KGFAN_" + Date.now(),
 
-        key: "pk_live_1cf174fc3d54f04c32f3da68d5b295c1f2545457",
-
-        email: email,
-
-        amount: amount * 100,
+        amount: amount,
 
         currency: "NGN",
 
-        reference: "KGFAN_" + Date.now(),
+        payment_options: "card, banktransfer, ussd",
 
-        metadata: {
+        customer: {
+            email: email
+        },
 
+        meta: {
             brand: "Kingdom Gospel For All Nations",
-
             donation_type: "General Donation",
-
             source: "Website"
-
         },
 
-        onSuccess(transaction) {
-
-            alert(
-                "Thank you for your donation!\nReference: " +
-                transaction.reference
-            );
-
-            // Later we'll verify the payment on your backend
-
+        customizations: {
+            title: "Kingdom Gospel For All Nations",
+            description: "General Donation",
+            logo: "https://yourwebsite.com/logo.png"
         },
 
-        onCancel() {
+        callback: function (transaction) {
+            if (transaction.status === "successful") {
+                alert(
+                    "Thank you for your donation!\nReference: " +
+                    transaction.tx_ref
+                );
 
-            alert("Donation cancelled.");
+                // Later, verify the transaction on your backend
+            } else {
+                alert("Payment was not successful.");
+            }
+        },
 
+        onclose: function (incomplete) {
+            if (incomplete) {
+                alert("Donation cancelled.");
+            }
         }
-
     });
-
 });
 
 
